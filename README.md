@@ -1,10 +1,10 @@
 # Unidad_3_Tarea_3
 
 # Sistema Experto para Black Jack 21
-## Reglas matematicas de las reglas y hechos
+## Reglas matemáticas de las reglas y hechos
 
 ## Integrantes
 ### Chaparro Castillo Christopher
 ### Peñuelas López Luis Antonio
 
-## Se realizo desarrollo de las Reglas matematicas de las reglas y hechos
+## Se realizó el desarrollo de las reglas matemáticas, de las reglas y hechos de la base de conocimiento con lógica proporcional
