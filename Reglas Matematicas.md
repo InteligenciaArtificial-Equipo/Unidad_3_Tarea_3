@@ -1,125 +1,62 @@
-# ♠️ Reglas del sistema experto de Blackjack en forma de Modus Ponens
+### Reglas del Blackjack en Formato Lógico (Modus Ponens)
 
-## Regla 1
+1. **Seguro contra A del dealer**
+   - \( \text{DealerMuestra(A)} \Rightarrow \neg \text{PagarSeguro} \)
 
-Si el dealer muestra un A, entonces nunca pagar seguro.
+2. **Dividir A-A**
+   - \( \text{JugadorTiene(A, A)} \Rightarrow \text{Dividir} \)
 
-P: Dealer muestra un A
-Q: No pagar seguro
+3. **Dividir 9-9 si dealer tiene 2–5 o 7–8; si no, plantarse**
+   - \( \text{JugadorTiene(9, 9)} \land \text{DealerEntre(2, 5)} \lor \text{DealerEntre(7, 8)} \Rightarrow \text{Dividir} \)
+   - \( \text{JugadorTiene(9, 9)} \land \neg(\text{DealerEntre(2, 5)} \lor \text{DealerEntre(7, 8)}) \Rightarrow \text{Plantarse} \)
 
-## Regla 2
+4. **Dividir 8-8**
+   - \( \text{JugadorTiene(8, 8)} \Rightarrow \text{Dividir} \)
 
-Si el jugador tiene A - A, entonces dividir.
+5. **Dividir 7-7, 2-2, 3-3 si dealer tiene 2–7; si no, pedir**
+   - \( \text{JugadorTiene(7, 7)} \land \text{DealerEntre(2, 7)} \Rightarrow \text{Dividir} \)
+   - \( \text{JugadorTiene(7, 7)} \land \neg \text{DealerEntre(2, 7)} \Rightarrow \text{Pedir} \)
+   - *(igual para 2-2 y 3-3)*
 
-P: Jugador tiene A - A
-Q: Dividir
+6. **Dividir 6-6 si dealer tiene 2–6; si no, pedir**
+   - \( \text{JugadorTiene(6, 6)} \land \text{DealerEntre(2, 6)} \Rightarrow \text{Dividir} \)
+   - \( \text{JugadorTiene(6, 6)} \land \neg \text{DealerEntre(2, 6)} \Rightarrow \text{Pedir} \)
 
-## Regla 3
+7. **Suma 8 = Pedir**
+   - \( \text{Suma(8)} \Rightarrow \text{Pedir} \)
 
-Si el jugador tiene 9 - 9 Y el dealer muestra una carta entre 2 - 5 O 7 - 8, entonces dividir; si no, plantarse.
+8. **A-2 o A-3 → Doblar si 2 cartas y dealer = 5 o 6; si no, pedir**
+   - \( \text{Mano(A, 2 o 3)} \land \text{DosCartas} \land (\text{DealerMuestra(5)} \lor \text{DealerMuestra(6)}) \Rightarrow \text{Doblar} \)
+   - \( \text{Mano(A, 2 o 3)} \land (\neg \text{DosCartas} \lor \neg (\text{DealerMuestra(5)} \lor \text{DealerMuestra(6)})) \Rightarrow \text{Pedir} \)
 
-P: Jugador tiene 9 - 9 y Dealer muestra carta entre 2 - 5 o 7 - 8
-Q: Dividir
-P': Si no, plantarse
+9. **A-4 o A-5 → Doblar si dealer 4–6 y 2 cartas; si no, pedir**
+   - \( \text{Mano(A, 4 o 5)} \land \text{DosCartas} \land \text{DealerEntre(4, 6)} \Rightarrow \text{Doblar} \)
+   - Si no, \( \Rightarrow \text{Pedir} \)
 
-## Regla 4
+10. **A-6 → Doblar si dealer 3–6 y 2 cartas; si no, pedir**
+    - \( \text{Mano(A, 6)} \land \text{DosCartas} \land \text{DealerEntre(3, 6)} \Rightarrow \text{Doblar} \)
+    - Si no, \( \Rightarrow \text{Pedir} \)
 
-Si el jugador tiene 8 - 8, entonces dividir.
+11. **A-7 → Doblar si dealer 3–6 y 2 cartas; pedir si dealer 9–A; si no, plantarse**
+    - \( \text{Mano(A, 7)} \land \text{DosCartas} \land \text{DealerEntre(3, 6)} \Rightarrow \text{Doblar} \)
+    - \( \text{Mano(A, 7)} \land \text{DealerEntre(9, A)} \Rightarrow \text{Pedir} \)
+    - Resto de casos: \( \Rightarrow \text{Plantarse} \)
 
-P: Jugador tiene 8 - 8
-Q: Dividir
+12. **Suma 9 → Doblar si dealer 3–6 y 2 cartas; si no, pedir**
+    - \( \text{Suma(9)} \land \text{DosCartas} \land \text{DealerEntre(3, 6)} \Rightarrow \text{Doblar} \)
+    - Si no, \( \Rightarrow \text{Pedir} \)
 
-## Regla 5
+13. **Suma 10 o 11 → Doblar si dealer 2–9 y 2 cartas; si no, pedir**
+    - \( \text{Suma(10 \lor 11)} \land \text{DosCartas} \land \text{DealerEntre(2, 9)} \Rightarrow \text{Doblar} \)
+    - Si no, \( \Rightarrow \text{Pedir} \)
 
-Si el jugador tiene 7 - 7 O 2 - 2 O 3 - 3 Y el dealer muestra una carta entre 2 - 7, entonces dividir; si no, pedir.
+14. **Suma 12 → Plantarse si dealer 4–6; si no, pedir**
+    - \( \text{Suma(12)} \land \text{DealerEntre(4, 6)} \Rightarrow \text{Plantarse} \)
+    - Si no, \( \Rightarrow \text{Pedir} \)
 
-P: Jugador tiene 7 - 7 o 2 - 2 o 3 - 3 y Dealer muestra carta entre 2 - 7
-Q: Dividir
-P': Si no, pedir
+15. **Suma 13–16 → Plantarse si dealer 2–6; si no, pedir**
+    - \( \text{SumaEntre(13, 16)} \land \text{DealerEntre(2, 6)} \Rightarrow \text{Plantarse} \)
+    - Si no, \( \Rightarrow \text{Pedir} \)
 
-## Regla 6
-
-Si el jugador tiene 6 - 6 Y el dealer muestra una carta entre 2 - 6, entonces dividir; si no, pedir.
-
-P: Jugador tiene 6 - 6 y Dealer muestra carta entre 2 - 6
-Q: Dividir
-P': Si no, pedir
-
-## Regla 7
-
-Si la suma del jugador es 8, entonces pedir.
-
-P: Jugador tiene suma = 8
-Q: Pedir
-
-## Regla 8
-
-Si el jugador tiene A y suma 2 O A y suma 3 Y tiene solo 2 cartas Y el dealer muestra un 5 o 6, entonces doblar; si no, pedir.
-
-P: Jugador tiene A y suma 2 o A y suma 3, solo 2 cartas, Dealer muestra 5 o 6
-Q: Doblar
-P': Si no, pedir
-
-## Regla 9
-
-Si el jugador tiene A y suma 4 O A y suma 5 Y tiene solo 2 cartas Y el dealer muestra una carta entre 4 y 6, entonces doblar; si no, pedir.
-
-P: Jugador tiene A y suma 4 o A y suma 5, solo 2 cartas, Dealer muestra carta entre 4 y 6
-Q: Doblar
-P': Si no, pedir
-
-## Regla 10
-
-Si el jugador tiene A y suma 6 Y tiene solo 2 cartas Y el dealer muestra una carta entre 3 y 6, entonces doblar; si no, pedir.
-
-P: Jugador tiene A y suma 6, solo 2 cartas, Dealer muestra carta entre 3 y 6
-Q: Doblar
-P': Si no, pedir
-
-## Regla 11
-
-Si el jugador tiene A y suma 7 Y tiene solo 2 cartas Y el dealer muestra una carta entre 3 y 6, entonces doblar; SI el dealer muestra 9 o A, entonces pedir; SI NO, plantarse.
-
-P: Jugador tiene A y suma 7, solo 2 cartas, Dealer muestra carta entre 3 y 6
-Q: Doblar
-P': Si Dealer muestra 9 o A, pedir
-P'': Si no, plantarse
-
-## Regla 12
-
-Si el jugador suma 9 Y tiene solo 2 cartas Y el dealer muestra una carta entre 3 y 6, entonces doblar; si no, pedir.
-
-P: Jugador tiene suma 9, solo 2 cartas, Dealer muestra carta entre 3 y 6
-Q: Doblar
-P': Si no, pedir
-
-## Regla 13
-
-Si el jugador suma 10 O 11 Y tiene solo 2 cartas Y el dealer muestra una carta entre 2 y 9, entonces doblar; si no, pedir.
-
-P: Jugador tiene suma 10 o 11, solo 2 cartas, Dealer muestra carta entre 2 y 9
-Q: Doblar
-P': Si no, pedir
-
-## Regla 14
-
-Si el jugador suma 12 Y el dealer muestra una carta entre 4 y 6, entonces plantarse; si no, pedir.
-
-P: Jugador tiene suma 12 y Dealer muestra carta entre 4 y 6
-Q: Plantarse
-P': Si no, pedir
-
-## Regla 15
-
-Si el jugador suma entre 13 y 16 Y el dealer muestra una carta entre 2 y 6, entonces plantarse; si no, pedir.
-
-P: Jugador tiene suma entre 13 y 16, Dealer muestra carta entre 2 y 6
-Q: Plantarse
-P': Si no, pedir
-
-## Regla 16
-
-Si el jugador suma entre 17 y 21, entonces plantarse.
-
-P: Jugador tiene suma entre 17 y 21
-Q: Plantarse
+16. **Suma 17–21 → Siempre plantarse**
+    - \( \text{SumaEntre(17, 21)} \Rightarrow \text{Plantarse} \)
